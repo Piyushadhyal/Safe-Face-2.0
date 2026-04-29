@@ -1,6 +1,6 @@
-# 🎯 SAFE FACE – Facial Recognition Attendance System
+# 🎯 Safe Face 2.0 – Facial Recognition Attendance System
 
-A real-time facial recognition attendance system with intruder detection and liveness verification.
+A real-time facial recognition attendance system with intruder detection and optional liveness verification.
 
 ---
 
@@ -8,10 +8,10 @@ A real-time facial recognition attendance system with intruder detection and liv
 
 * 🎥 Real-time face detection (InsightFace)
 * 🧠 Face recognition with database matching
-* 🚨 Intruder detection + photo logging
-* 📊 CSV logging (arrivals + intruders)
-* 🔐 Liveness detection (anti-spoof)
-* 🖥 GUI built with Tkinter
+* 🚨 Intruder detection with photo capture
+* 📊 Attendance logging (CSV)
+* 🔐 Optional liveness detection (anti-spoof)
+* 🖥 Tkinter-based GUI
 
 ---
 
@@ -22,33 +22,17 @@ A real-time facial recognition attendance system with intruder detection and liv
 * InsightFace (ONNX)
 * TensorFlow (liveness model)
 * MongoDB
-* Tkinter GUI
-
----
-
-## 📁 Project Structure
-
-```
-safe-face/
-│── INF.py
-│── requirements.txt
-│── README.md
-│
-├── known_faces/
-├── logs/
-├── intruder_photos/
-├── models/
-```
+* Tkinter
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone repo
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/safe-face.git
-cd safe-face
+git clone https://github.com/your-username/safe-face-2.0.git
+cd safe-face-2.0
 ```
 
 ---
@@ -57,7 +41,7 @@ cd safe-face
 
 ```bash
 python -m venv face_env
-face_env\Scripts\activate   # Windows
+face_env\Scripts\activate
 ```
 
 ---
@@ -70,52 +54,138 @@ pip install -r requirements.txt
 
 ---
 
-### 4. Setup MongoDB
+### 4. Start MongoDB
 
-Make sure MongoDB is running locally:
+Ensure MongoDB is running locally:
 
-```bash
+```
 mongodb://localhost:27017/
 ```
 
 ---
 
-### 5. Run the app
+### 5. Run the application
 
 ```bash
-python INF.py
+python maincode.py
 ```
 
 ---
 
-## 📸 How it works
+## 📂 Auto-Created Folders
 
-1. Camera starts scanning faces
-2. Face is detected and encoded
-3. Compared with stored database
-4. If matched → attendance logged
-5. If unknown → intruder photo saved
+When you run the application, these folders are automatically created:
+
+* `logs/` → stores:
+
+  * `arrivals.csv`
+  * `intruders.csv`
+
+* `intruder_photos/` → stores captured images of unknown faces
 
 ---
 
-## ⚠️ Notes
+## 📸 How It Works
 
-* Do NOT upload logs or intruder images to GitHub
-* Liveness model (`liveness_model.keras`) train your model
+1. Camera starts scanning
+2. Face is detected using InsightFace
+3. Face encoding is generated
+4. Compared with database
+5. If matched → attendance logged
+6. If unknown → intruder image saved
+
+---
+
+## 🧠 Liveness Detection Model
+
+### 📌 Purpose
+
+Helps prevent spoofing using:
+
+* Photos
+* Screens
+* Printed images
+
+---
+
+### 🏋️ Train Your Own Model
+
+Prepare dataset:
+
+```
+dataset/
+  real/
+  fake/
+```
+
+Train using TensorFlow:
+
+```python
+model.fit(train_data, epochs=10)
+model.save("liveness_model.keras")
+```
+
+---
+
+### 💾 Using the Model
+
+* Place the model file in the project root:
+
+  ```
+  liveness_model.keras
+  ```
+
+* The application loads it automatically on startup
+
+---
+
+### ⚠️ If Model is Missing
+
+* System still runs normally
+* Liveness detection is disabled
+
+---
+
+## 📊 Logs
+
+### Arrival Log
+
+```
+logs/arrivals.csv
+```
+
+Contains:
+
+* Log ID
+* Name
+* Date
+* Time
+
+---
+
+### Intruder Log
+
+```
+logs/intruders.csv
+```
+
+Contains:
+
+* Date
+* Time
+* Photo path
 
 ---
 
 ## 🔮 Future Improvements
 
-* GPU acceleration
-* Better anti-spoofing
-* Face tracking (no re-detection flicker)
-* Web dashboard
+* ⚡ GPU acceleration
+* 🎯 Improved liveness detection
+* 🧠 Better face tracking (reduce flicker)
+* 🌐 Web dashboard
 
 ---
 
 ## 👨‍💻 Author
 
-Built for learning + real-world deployment.
-
----
+Safe Face 2.0 – Built for real-time security and attendance tracking.
