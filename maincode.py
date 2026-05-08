@@ -1,5 +1,5 @@
 """
-Facial Recognition Attendance System
+Facial Recognition Security System
 InsightFace edition — drop-in replacement for face_recognition module
 Requirements: opencv-python, insightface, pillow, numpy, onnxruntime, pymongo, tensorflow
 Install: pip install opencv-python insightface pillow numpy onnxruntime pymongo tensorflow
@@ -385,7 +385,7 @@ class App(tk.Tk):
             self.liveness_model = None
 
         self._add_win = None
-        self.title("SAFE FACE")
+        self.title("SAFE FACE 2.0")
         self.geometry("1100x660")
         self.resizable(True, True)
         self.configure(bg="#1e1e2e")
@@ -478,7 +478,7 @@ class App(tk.Tk):
     def _build_ui(self) -> None:
         top = tk.Frame(self, bg="#11111b", pady=8)
         top.pack(fill=tk.X)
-        tk.Label(top, text="SAFE FACE", font=("Courier", 14, "bold"),
+        tk.Label(top, text="SAFE FACE 2.0", font=("Courier", 14, "bold"),
                  bg="#11111b", fg="#cdd6f4").pack()
 
         main = tk.Frame(self, bg="#1e1e2e")
